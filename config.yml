@@ -1,0 +1,26 @@
+###### Sample and Reference Information ######
+# change paths accordingly for your system
+
+fastq_directory:
+  /home1/jh212a/transferred/CompartmentizationStudy/preliminaryAnalyses/consensusAlignment/preprocessing/patient02/originalData
+
+# reference genome needs to be indexed, e.g.: bowtie2-build patient02_complete_genome.fa patient02_complete_genome
+# and the reference is the complete finished genome from the patient obtained via spades and scaffold_builder
+# reference also needs to be indexed for lofreq, e.g.: samtools faidx reference.fa
+reference:
+  /home1/jh212a/bin/HCMVmut/patient02_complete_genome.fa
+ref_id:
+  Saliva-21_assembly_26May16
+index:
+  /home1/jh212a/bin/HCMVmut/patient02_complete_genome
+output:
+  /home1/jh212a/bin/HCMVmut
+
+
+
+
+
+
+
+
+

@@ -17,6 +17,7 @@ cd HCMVmut
 ```
 conda env create -f environment.yml
 ```
+ - Change paths in config.yml for you input files
 
  - Run the snakemake pipeline
 ```

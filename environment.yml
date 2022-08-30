@@ -1,0 +1,15 @@
+name: HCMVmut
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - trim-galore
+  - bowtie2
+  - samtools
+  - fastuniq
+  - prinseq
+  - picard
+  - lofreq
+  - vardict=1.8.2
+  - snakemake-minimal=5.8.1
