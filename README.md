@@ -2,23 +2,23 @@
 Identifying low frequency mutations in the HCMV genome
 
 
-Download the github repository
+ - Download the github repository
 ```
 git clone git@github.com:josephhughes/HCMVmut.git
 ```
 
-Navigate into the directory
+ - Navigate into the directory
 ```
 cd HCMVmut
 ```
 
 
-Install the environment
+ - Install the environment
 ```
 conda env create -f environment.yml
 ```
 
-Run the snakemake pipeline
+ - Run the snakemake pipeline
 ```
 snakemake -s HCMVmut.smk --cores 4
 ```
