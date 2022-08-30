@@ -4,7 +4,7 @@ Identifying low frequency mutations in the HCMV genome
 
  - Download the github repository
 ```
-git clone git@github.com:josephhughes/HCMVmut.git
+git clone https://github.com/josephhughes/HCMVmut.git
 ```
 
  - Navigate into the directory
