@@ -92,11 +92,11 @@ rule Dedup1:
 
 # third step (Qual) - stringent quality filter 
 # PRINSEQ with: 
-# (i) reads retained if their average quality score was >25, 
-# (ii) the 3′ end of each read trimmed if the mean quality score was <30, 
+# 1. reads retained if their average quality score was >25, 
+# 2. the 3′ end of each read trimmed if the mean quality score was <30, 
 # using a sliding window (--trim_qual_window) of 5 nt and a step size (--trim_qual_step) of 1 nt, 
-# (iii) homopolymeric sequences of >20 nt trimmed from the 3’ end of reads, and 
-# (iv) only reads with a residual length of ≥80 nt were retained. 
+# 3. homopolymeric sequences of >20 nt trimmed from the 3’ end of reads, and 
+# 4. only reads with a residual length of ≥80 nt were retained. 
 # The filtered reads should be called prefix_1.fastq and 
 # prefix_2.fastq but this time should be placed in a folder called 
 # tr_dd_pr_MQ_25_TQ_30_TQW_5_TQS_1_polyN
@@ -182,24 +182,3 @@ rule picard:
       samtools index {output.nodupbam}
   """
 
-#Calculate SNPs for tr_dd_pr_polyN reads
-# os.system("bowtie2 --end-to-end -1 "+read1_tr_dd_pr_polyN+" -2 "+read2_tr_dd_pr_polyN+" -x "+referenceIndex+" -S "+prefix+"_tr_dd_pr_polyN_alignment.sam")
-# os.system("samtools view -bS -h -F 4 "+prefix+"_tr_dd_pr_polyN_alignment.sam >"+prefix +"_tr_dd_pr_polyN_alignment.bam")
-# os.system("samtools sort -o "+prefix + "_tr_dd_pr_polyN_alignment_sorted.bam "+prefix +"_tr_dd_pr_polyN_alignment.bam")
-# os.system("~/Software/jre1.8.0_191/bin/java -jar -XX:ParallelGCThreads=2 ~/Software/mySoftware/old/GRACy/resources/picard.jar  AddOrReplaceReadGroups I="+prefix + "_tr_dd_pr_polyN_alignment_sorted.bam  O="+prefix+"_rg_added_sorted.bam SO=coordinate RGID=id RGLB=library RGPL=Ilumina RGPU=machine RGSM=Consensus")
-# os.system("~/Software/jre1.8.0_191/bin/java -jar -XX:ParallelGCThreads=2  ~/Software/mySoftware/old/GRACy/resources/picard.jar MarkDuplicates I="+prefix+"_rg_added_sorted.bam O="+prefix+"_tr_dd_pr_polyN_markedDuplicates.bam CREATE_INDEX=tr_dd_pr_polyNue VALIDATION_STRINGENCY=SILENT M=output.metr_dd_pr_polyNics")
-# os.system("samtools index "+prefix + "_tr_dd_pr_polyN_alignment_sorted.bam")
-# os.system("samtools index "+prefix +"_tr_dd_pr_polyN_markedDuplicates.bam")
-# os.system("samtools view -b -h -F 1024 "+prefix +"_tr_dd_pr_polyN_markedDuplicates.bam > "+prefix+"_tr_dd_pr_polyN_markedDuplicates_noDup.bam")
-# os.system("samtools index "+prefix+"_tr_dd_pr_polyN_markedDuplicates_noDup.bam")
-# os.system("rm -f "+prefix+"_tr_dd_pr_polyN_alignment.sam")
-# os.system("rm -f "+prefix+"_tr_dd_pr_polyN_alignment.bam")
-# os.system("lofreq call-parallel --pp-threads "+threads+" -f "+reference+" -Q 30 -q 30 -o "+prefix+"_tr_dd_pr_polyN_SNPs.vcf "+prefix + "_tr_dd_pr_polyN_alignment_sorted.bam")
-# os.system("lofreq call-parallel --pp-threads "+threads+" -f "+reference+" -Q 30 -q 30 -o "+prefix+"_tr_dd_pr_polyN_markedDup_SNPs.vcf "+prefix +"_tr_dd_pr_polyN_markedDuplicates.bam")
-# os.system("~/Software/VarDictJava/build/install/VarDict/bin/VarDict -th "+threads+" -G "+reference+" -f 0.001 -q 30 -N identifier -b "+prefix + "_tr_dd_pr_polyN_alignment_sorted.bam -R "+referenceID+":0-236000 > "+prefix+"_tr_dd_pr_polyN_noFilter.txt")
-# os.system("awk '$12>=2 && $13>=2 && $34==\"SNV\"' "+prefix+"_tr_dd_pr_polyN_noFilter.txt > "+prefix+"_tr_dd_pr_polyN_noFilter_4_2.txt")
-# os.system("~/Software/VarDictJava/build/install/VarDict/bin/VarDict -th "+threads+" -G "+reference+" -f 0.001 -q 30 -N identifier -b "+prefix + "_tr_dd_pr_polyN_markedDuplicates_noDup.bam -R "+referenceID+":0-236000 > "+prefix+"_tr_dd_pr_polyN_noDup_noFilter.txt")
-# os.system("awk '$12>=2 && $13>=2 && $34==\"SNV\"' "+prefix+"_tr_dd_pr_polyN_noDup_noFilter.txt > "+prefix+"_tr_dd_pr_polyN_noDup_noFilter_4_2.txt")
-# os.system("rm -f "+prefix+"_tr_dd_pr_polyN_alignment_sorted.bam")
-# os.system("rm -f "+prefix+"_tr_dd_pr_polyN_markedDuplicates.bam")
-# os.system("rm -f "+prefix+"_tr_dd_pr_polyN_markedDuplicates_noDup.bam")
